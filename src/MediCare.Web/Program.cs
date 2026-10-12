@@ -1,6 +1,10 @@
+using MediCare.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Registers ApplicationDbContext, the unit of work, and application services.
+// The web project talks to MediCare.Services only. It does not reference MediCare.Data.
+builder.Services.AddMediCareServices(builder.Configuration);
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

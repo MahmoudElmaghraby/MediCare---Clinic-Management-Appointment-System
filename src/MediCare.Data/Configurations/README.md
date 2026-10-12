@@ -1,3 +1,3 @@
 # Configurations
 
-EF Core `IEntityTypeConfiguration<T>` classes (table names, keys, relationships). Applied from the `DbContext` when that class is added.
+EF Core `IEntityTypeConfiguration<T>` classes. `SpecializationConfiguration` is the sample. `ApplicationDbContext` applies every configuration in this assembly.

@@ -1,3 +1,3 @@
 # Unit of Work
 
-Unit of Work implementation that commits a group of repository changes in one `SaveChanges`. The interface can live in `Interfaces/`.
+`UnitOfWork` exposes repositories and calls `SaveChangesAsync` once. The interface is `IUnitOfWork` in `Interfaces/`.
