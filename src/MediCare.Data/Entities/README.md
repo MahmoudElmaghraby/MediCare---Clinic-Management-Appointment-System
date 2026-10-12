@@ -1,3 +1,3 @@
 # Entities
 
-Domain entity classes for the clinic (patients, doctors, appointments, and so on). Leave this folder empty until the entity task. Do not add ASP.NET Identity user classes here unless that task says so.
+`BaseEntity` holds the shared `Id`. `Specialization` is the sample entity. Add clinic entities here and inherit `BaseEntity`. Do not add ASP.NET Identity user classes unless that task says so.

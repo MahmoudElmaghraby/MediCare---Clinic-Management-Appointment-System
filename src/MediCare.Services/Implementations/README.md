@@ -1,3 +1,3 @@
 # Implementations
 
-Service classes that implement the contracts in `Interfaces/`. Call repositories through the Unit of Work instead of using `DbContext` from the web project.
+Service classes. `SpecializationService` is the sample. Call repositories through the unit of work. Do not use `DbContext` from the web project.

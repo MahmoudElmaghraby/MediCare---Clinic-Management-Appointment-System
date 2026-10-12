@@ -1,14 +1,13 @@
 # MediCare.Data
 
-EF Core data access (SQL Server). `MediCare.Services` references this project. `MediCare.Web` does not.
+EF Core data access for SQL Server. `MediCare.Services` references this project. `MediCare.Web` does not.
 
-NuGet packages are referenced so later tasks can use them. There is no `DbContext`, no entities, no repositories, and no ASP.NET Identity code yet. Add those in the Jira task that owns them.
+`ApplicationDbContext`, `BaseEntity`, and the specialization sample are the pattern to copy. ASP.NET Identity is referenced and not implemented yet.
 
-| Folder | What goes here |
-| --- | --- |
-| `Entities/` | Domain entity classes |
-| `Repositories/` | Repository implementations |
-| `Interfaces/` | Repository and unit-of-work contracts |
-| `UnitOfWork/` | Unit of Work |
-| `Configurations/` | EF Core `IEntityTypeConfiguration` classes |
-| `Migrations/` | EF Core migrations |
+- `Entities/`: table classes. `BaseEntity` and `Specialization` are the sample.
+- `Configurations/`: EF Core `IEntityTypeConfiguration` classes.
+- `Repositories/`: `Repository<T>` and specific repositories.
+- `Interfaces/`: `IRepository<T>`, specific repository contracts, and `IUnitOfWork`.
+- `UnitOfWork/`: `UnitOfWork`, which saves changes once.
+- `Migrations/`: EF Core migrations. The first one is `InitialCreate`.
+- `DependencyInjection.cs`: `AddMediCareData`, called from `MediCare.Services`.

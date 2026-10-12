@@ -1,3 +1,3 @@
 # Repositories
 
-Repository implementations. Depend on the contracts in `Interfaces/` and keep EF Core queries in this project.
+`Repository<T>` is the generic EF Core repository. `SpecializationRepository` adds queries that belong only to that table. New repositories should follow the same pair: interface in `Interfaces/`, class here.

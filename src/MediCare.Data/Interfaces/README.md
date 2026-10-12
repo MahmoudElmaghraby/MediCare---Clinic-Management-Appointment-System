@@ -1,3 +1,3 @@
 # Interfaces
 
-Data contracts such as `IRepository<T>` and `IUnitOfWork`. Implementations stay in `Repositories/` and `UnitOfWork/`.
+`IRepository<T>` and `IUnitOfWork` live here, plus specific contracts such as `ISpecializationRepository`. Implementations stay in `Repositories/` and `UnitOfWork/`.

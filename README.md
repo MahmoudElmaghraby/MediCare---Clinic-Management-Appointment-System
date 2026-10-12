@@ -12,35 +12,16 @@ Clinic management and appointment system. DEPI graduation project for a six-pers
 
 ## Architecture
 
-N-tier. The web project depends on services, and services depend on data. Repository, Unit of Work, and Factory types are not written yet; the folders are ready and dependencies are injected from `Program.cs` when those types exist.
+N-tier. The web project depends on services, and services depend on data. A working sample (specialization) shows the base entity, repository, unit of work, factory, service, and dependency injection. Copy that sample for the next feature. The Arabic team guide is [docs/project-guide-ar.md](docs/project-guide-ar.md).
 
-```mermaid
-flowchart LR
-    subgraph browser [Browser]
-        UI["Razor views, Bootstrap 5"]
-        LaterUi["FullCalendar.js and Chart.js later"]
-    end
-    subgraph web [MediCare.Web]
-        MVC["ASP.NET Core MVC"]
-    end
-    subgraph services [MediCare.Services]
-        BL["Business logic and factories"]
-    end
-    subgraph data [MediCare.Data]
-        EF["EF Core repositories and unit of work"]
-    end
-    DB[("SQL Server")]
-    External["Twilio, SendGrid, Azure later"]
-
-    UI --> MVC
-    LaterUi -.-> MVC
-    MVC --> BL
-    BL --> EF
-    EF --> DB
-    MVC -.-> External
+```text
+Browser (Razor, Bootstrap 5) calls MediCare.Web
+MediCare.Web calls MediCare.Services
+MediCare.Services calls MediCare.Data
+MediCare.Data calls SQL Server
 ```
 
-Solid arrows are the project references in this skeleton. Dashed arrows are planned and not implemented.
+FullCalendar.js, Chart.js, SignalR, Twilio, SendGrid, and Azure are planned around the web app and are not implemented yet.
 
 ## Folder structure
 
@@ -69,7 +50,7 @@ docs/                    architecture, ERD, user manual, setup guide
   pull_request_template.md
 ```
 
-Project references: `MediCare.Web` → `MediCare.Services` → `MediCare.Data`. The test project references all three. `MediCare.Data` already references EF Core SQL Server, EF Core Tools, and ASP.NET Identity Entity Framework Core 8.0.31. No `DbContext` or Identity types are included.
+Project references: `MediCare.Web` → `MediCare.Services` → `MediCare.Data`. The test project references all three. `MediCare.Data` references EF Core SQL Server, EF Core Tools, and ASP.NET Identity Entity Framework Core 8.0.31. `ApplicationDbContext` and the specialization sample are in place. Identity roles are not wired up yet.
 
 ## Run locally
 
@@ -82,10 +63,16 @@ dotnet test MediCare.sln
 dotnet run --project src/MediCare.Web --launch-profile http
 ```
 
-Open `http://localhost:5067`. The HTTPS profile is in `src/MediCare.Web/Properties/launchSettings.json`. SQL Server is not required yet. Add the connection string with [user secrets](https://learn.microsoft.com/aspnet/core/security/app-secrets) when the database task starts, not in `appsettings.json`.
+Open `http://localhost:5067`. The HTTPS profile is in `src/MediCare.Web/Properties/launchSettings.json`. The home page does not query SQL Server. A local connection string without a password is in `appsettings.json`. Apply the migration when the database is installed:
+
+```bash
+dotnet ef database update --project src/MediCare.Data --startup-project src/MediCare.Data
+```
+
+Keep real passwords in [user secrets](https://learn.microsoft.com/aspnet/core/security/app-secrets), not in Git.
 
 ## Team
 
 Mahmoud, Ahmed, Ehab, Peter, Salem, Hady.
 
-How we branch and open pull requests is in [CONTRIBUTING.md](CONTRIBUTING.md). Documents go in [docs/](docs/README.md).
+How we branch and open pull requests is in [CONTRIBUTING.md](CONTRIBUTING.md). Documents go in [docs/](docs/README.md). Beginners should start with [the Arabic project guide](docs/project-guide-ar.md).
